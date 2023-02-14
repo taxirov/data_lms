@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteGroup, getGroupById, getGroups, postGroup, putGroup } from "../controllers/groups";
+import { deleteGroup, getGroupById, getGroups, postGroup, putGroup } from "../controllers/groups.controller";
 const router = Router()
 
 router.get('/', getGroups)

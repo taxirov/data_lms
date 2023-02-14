@@ -1,0 +1,14 @@
+@url = http://localhost:7070/teachers
+
+###
+GET {{url}}
+
+###
+POST {{url}}
+Content-Type: application/json
+
+{
+    "firstname": "Akmal",
+    "lastname": "Nosirov",
+    "phone": "+998909009090"
+}

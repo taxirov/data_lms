@@ -1,5 +1,6 @@
+import { Group } from "@prisma/client";
 import { Request, Response } from "express";
-import { findGroupById, findAllGroups, createGroup, removeGroup } from "../services/groups.service";
+import { findGroupById, findAllGroups, createGroup, removeGroup, updateGroup } from "../services/groups.service";
 
 interface GroupDto {
     name: string
@@ -42,7 +43,23 @@ export async function postGroup(req: Request, res: Response) {
 }
 
 export async function putGroup(req: Request, res: Response) {
+    const id: string = req.params.id
     const body: GroupDto  = req.body
+    const group = await updateGroup(id, body.name, body.direction)
+    if(group == null) {
+        return res.status(404).json({
+            message: "Group not found"
+        })
+    }
+    if(group == 0) {
+        return res.status(404).json({
+            message: "Fields must not be empty"
+        })
+    }
+    res.status(200).json({
+        message: "Group updated",
+        group
+    })
     
 }
 

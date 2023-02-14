@@ -1,4 +1,4 @@
-@url = http://localhost:7070/groups
+@url = http://localhost:7060/groups
 
 ###
 GET {{url}}
@@ -16,9 +16,9 @@ Content-Type: application/json
 DELETE {{url}}/e1c0e6aa-7ce5-4e3b-b09f-dbb57c0d3371
 
 ###
-PUT {{url}}/73aea78a-9a6f-431c-9506-94b66a32609c
+PUT {{url}}/f34820eb-4157-46d0-840b-102718cf627f
 Content-Type: application/json
 
 {
-
+    "name": "NodeJs-147"
 }
