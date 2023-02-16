@@ -6,10 +6,21 @@
 - O'quvchilar
 - Topshiriqlar
 
--- Guruhlar
+### Guruhlar
 ```
 interface Guruh {
     id: string,
     name: string,
-    direction
+    direction: string
 }
+```
+
+### Teacher
+```
+interface Teacher {
+    id: string,
+    firstname: string,
+    lastname: string,
+    groups: string[]
+}
+```
