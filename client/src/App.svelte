@@ -1,40 +1,7 @@
 <script lang="ts">
-	import axios from "axios";
-	
-	interface Group {
-		id: string;
-		name: string;
-		direction: string;
-	}
+    import type { Group } from "./api/groups.api";
 
-	let groups: Group[] = [];	
-	let group_name: HTMLInputElement;
-	let group_direction: HTMLInputElement;
-	let i: number = 1
-
-	async function getAllGroups() {
-		axios.get("http://localhost:7060/groups").then(async (res) => {
-			groups = await res.data.groups;
-		});
-	}
-	async function postGroup(name: string, direction: string) {
-		const group = {
-			name,
-			direction,
-		};
-		axios.post("http://localhost:7060/groups", group).then(async (res) => {
-			alert(await res.data.message);
-			getAllGroups();
-		});
-	}
-	async function deleteGroup(id: string) {
-		axios.delete("http://localhost:7060/groups/" + id).then(async (res) => {
-			alert(await res.data.message);
-			getAllGroups();
-		});
-	}
-
-	getAllGroups();
+	let groups: Group[] = []
 </script>
 
 <head>
@@ -141,7 +108,7 @@
 						</tr>
 						{#each groups as group}
 							<tr>
-								<td class="border border-slate-600 p-2"> {i} </td>
+								<td class="border border-slate-600 p-2"> 1 </td>
 								<td class="border border-slate-600 p-2"
 									>{group.name}</td
 								>
