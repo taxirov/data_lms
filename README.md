@@ -5,3 +5,11 @@
 - O'qituvchilar
 - O'quvchilar
 - Topshiriqlar
+
+-- Guruhlar
+```
+interface Guruh {
+    id: string,
+    name: string,
+    direction
+}
