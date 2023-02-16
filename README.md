@@ -4,3 +4,4 @@
 - Guruhlar
 - O'qituvchilar
 - O'quvchilar
+- Topshiriqlar
