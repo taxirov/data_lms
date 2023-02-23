@@ -1,4 +1,5 @@
 import axios from "axios";
+import { groupsStore } from "../store/groups.store";
 	
 	export type Group = {
 		id: string;
@@ -6,31 +7,44 @@ import axios from "axios";
 		direction: string;
 	}
 
-	let groups: Group[] = [];	
-	let group_name: HTMLInputElement;
-	let group_direction: HTMLInputElement;
-	let i: number = 1
-
-	export async function getAllGroups() {
-		axios.get("http://localhost:7060/groups").then(async (res) => {
-			groups = await res.data.groups;
-		});
+	export async function getGroups() {
+		const response = await axios.get("http://localhost:7060/groups")
+		groupsStore.set(response.data.groups)
 	}
 	export async function postGroup(name: string, direction: string) {
-		const group = {
+		const body = {
 			name,
-			direction,
-		};
-		axios.post("http://localhost:7060/groups", group).then(async (res) => {
-			alert(await res.data.message);
-			getAllGroups();
-		});
+			direction
+		}
+	
+		const response = await axios.post('http://localhost:7060/groups', body)
+	
+		groupsStore.update(oldState => {
+			oldState.push(response.data.group)
+			return oldState
+		})
+		getGroups()
 	}
 	export async function deleteGroup(id: string) {
-		axios.delete("http://localhost:7060/groups/" + id).then(async (res) => {
-			alert(await res.data.message);
-			getAllGroups();
-		});
+		const response = await axios.delete("http://localhost:7060/groups/" + id)
+
+		if (response.status == 200) {
+			groupsStore.update(oldState => {
+				return oldState.filter(group => group.id != id)
+			})
+		}
 	}
 
-	getAllGroups();
+	export async function updateGroup(id: string, name: string, direction: string) {
+		const body: Group = {
+			id,
+			name,
+			direction
+		}
+		const response = await axios.put("http://localhost:7060/groups/" + id, body)
+		if (response.status == 200) {
+			groupsStore.update(oldState => {
+			   return oldState.map(group => group.id == id ? response.data.group : group );
+		   })
+		}
+	}

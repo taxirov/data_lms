@@ -1,7 +1,3 @@
 import { PrismaClient } from "@prisma/client"
-const client = new PrismaClient({
-    log: [
-        { emit: 'stdout', level: 'query' }
-    ]
-})
+const client = new PrismaClient()
 export default client

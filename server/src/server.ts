@@ -10,6 +10,11 @@ import students from './routes/students.routes'
 
 const app = express()
 
+enum Roles {
+    ADMIN = "ADMIN",
+    USER = "USER"
+}
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

@@ -18,12 +18,14 @@ export async function findTeacherById(id: string) {
     return teacher
 }
 
-export async function createTeacher(firstname: string, lastname: string, phone: string) {
+export async function createTeacher(firstname: string, lastname: string, email: string, password: string, groupId: string) {
     const teacher = await client.teacher.create({
         data: {
             firstname,
             lastname,
-            phone
+            email,
+            password,
+            groupId
         }
     })
     return teacher

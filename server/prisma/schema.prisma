@@ -13,18 +13,20 @@ model Group {
   direction String
 }
 
-model Teacher {
-  id        String @id @default(uuid())
+model Student {
+  id        String   @id @default(uuid())
   firstname String
   lastname  String
-  phone     String
-  groups    String[]
+  email     String   @unique
+  password  String
+  groupId   String
 }
 
-model Student {
-  id        String @id @default(uuid())
+model Teacher {
+  id        String   @id @default(uuid())
   firstname String
   lastname  String
-  phone     String
-  groups    String[]
+  email     String   @unique
+  password  String
+  groupId   String
 }

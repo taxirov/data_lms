@@ -4,7 +4,9 @@ import { findAllTeachers, findTeacherById, createTeacher, removeTeacher } from "
 interface TeacherDto {
     firstname: string
     lastname: string
-    phone: string
+    email: string
+    password: string
+    groupId: string
 }
 export async function getTeachers(req: Request, res: Response) {
     const teachers = await findAllTeachers()
@@ -30,12 +32,12 @@ export async function getTeacherById(req: Request, res: Response) {
 
 export async function postTeacher(req: Request, res: Response) {
     const body: TeacherDto = req.body
-    if (body.firstname.length == 0 || body.lastname.length == 0 || body.phone.length == 0) {
+    if (body.firstname.length == 0 || body.lastname.length == 0 || body.email.length == 0) {
         return res.status(400).json({
             message: "Fields must not be empty"
         })
     }
-    const teacher = await createTeacher(body.firstname, body.lastname, body.phone)
+    const teacher = await createTeacher(body.firstname, body.lastname, body.email, body.password, body.groupId)
     res.status(201).json({
         message: "Teacher created",
         teacher
